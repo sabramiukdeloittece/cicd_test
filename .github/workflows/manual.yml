@@ -27,8 +27,8 @@ jobs:
     - name: Login to DevHub
       shell: bash
       run: |
-        echo  ${{ secrets.SFDX_AUTH_DEVHUB }} > ./authurlfile.json
-        sf org login sfdx-url --sfdx-url-file authurlfile.json --set-default-dev-hub --alias=devhub
+        echo  ${{ secrets.SFDX_AUTH_DEVHUB }} > ./authurlfile
+        sf org login sfdx-url --sfdx-url-file authurlfile --set-default-dev-hub --alias=devhub
     
     - name: Check login
       run: |
