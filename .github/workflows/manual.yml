@@ -53,6 +53,10 @@ jobs:
           sf org list
           ls -la
 
+    - name: check volume
+      run: |
+        ls -la
+
     - name: Check login in docker
       uses: addnab/docker-run-action@v3
       with:
