@@ -27,15 +27,15 @@ jobs:
         fetch-depth: 0
 
     # Runs a single command using the runners shell
-    - name: Login to DevHub
-      shell: bash
-      run: |
-        echo  ${{ secrets.SFDX_AUTH_DEVHUB }} > ./authurlfile
-        sf org login sfdx-url --sfdx-url-file authurlfile --set-default-dev-hub --alias=devhub
+    # - name: Login to DevHub
+    #   shell: bash
+    #   run: |
+    #     echo  ${{ secrets.SFDX_AUTH_DEVHUB }} > ./authurlfile
+    #     sf org login sfdx-url --sfdx-url-file authurlfile --set-default-dev-hub --alias=devhub
     
-    - name: Check login
-      run: |
-        sf org list
+    # - name: Check login
+    #   run: |
+    #     sf org list
     # - name: Scanner
     #   run: |
     #     sf scanner run --format sarif --target './**/*.cls' --category "Design,Best Practices,Performance" --outfile 'apexScanResults.sarif'
@@ -47,6 +47,7 @@ jobs:
       uses: addnab/docker-run-action@v3
       with:
         image: ghcr.io/flxbl-io/sfp
+        options: -v ${{ github.workspace }}:${{ github.workspace }}
         run: |
           echo  ${{ secrets.SFDX_AUTH_DEVHUB }} > ./authurlfile
           sf org login sfdx-url --sfdx-url-file authurlfile --set-default-dev-hub --alias=devhub
@@ -61,5 +62,6 @@ jobs:
       uses: addnab/docker-run-action@v3
       with:
         image: ghcr.io/flxbl-io/sfp
+        options: -v ${{ github.workspace }}:${{ github.workspace }}
         run: |
           sf org list
