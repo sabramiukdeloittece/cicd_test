@@ -1,0 +1,48 @@
+# This is a basic workflow that is manually triggered
+
+name: Prepare CI pool
+
+# Controls when the action will run. Workflow runs when manually triggered using the UI
+# or API.
+on:
+
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "greet"
+  greet:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    #container: ghcr.io/flxbl-io/sfp
+    environment: devhub
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    - name: 'Checkout source code'
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Login to DevHub in docker
+      uses: addnab/docker-run-action@v3
+      with:
+        image: ghcr.io/flxbl-io/sfp
+        options: -v ${{ github.workspace }}:/root/workspace
+        run: |
+          echo  ${{ secrets.SFDX_AUTH_DEVHUB }} > ./authurlfile
+          sf org login sfdx-url --sfdx-url-file authurlfile --set-default-dev-hub --alias=devhub
+          sf org list
+          cp -r .sf ./workspace/c.sf
+          cp -r .sfdx ./workspace/c.sfdx
+
+    - name: Prepare pool
+      uses: addnab/docker-run-action@v3
+      with:
+        image: ghcr.io/flxbl-io/sfp
+        options: -v ${{ github.workspace }}:/root/workspace
+        run: |
+          cp -rf ./workspace/c.sf ./.sf
+          cp -rf ./workspace/c.sfdx ./.sfdx
+          cd workspace
+          sfp prepare -f config/project-ci-pool-def.json -v devhub

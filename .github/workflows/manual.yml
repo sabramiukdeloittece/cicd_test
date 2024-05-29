@@ -5,6 +5,9 @@ name: Manual workflow
 # Controls when the action will run. Workflow runs when manually triggered using the UI
 # or API.
 on:
+  pull_request:
+    types: [opened, reopened, synchronize]
+
   workflow_dispatch:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
@@ -24,20 +27,68 @@ jobs:
         fetch-depth: 0
 
     # Runs a single command using the runners shell
-    - name: Login to DevHub
-      shell: bash
-      run: |
-        echo  ${{ secrets.SFDX_AUTH_DEVHUB }} > ./authurlfile
-        sf org login sfdx-url --sfdx-url-file authurlfile --set-default-dev-hub --alias=devhub
+    # - name: Login to DevHub
+    #   shell: bash
+    #   run: |
+    #     echo  ${{ secrets.SFDX_AUTH_DEVHUB }} > ./authurlfile
+    #     sf org login sfdx-url --sfdx-url-file authurlfile --set-default-dev-hub --alias=devhub
     
-    - name: Check login
-      run: |
-        sf org list
-    - name: Scanner
-      run: |
-        sf scanner run --format sarif --target './**/*.cls' --category "Design,Best Practices,Performance" --outfile 'apexScanResults.sarif'
-    - name: Upload SARIF file
-      uses: github/codeql-action/upload-sarif@v3
+    # - name: Check login
+    #   run: |
+    #     sf org list
+    # - name: Scanner
+    #   run: |
+    #     sf scanner run --format sarif --target './**/*.cls' --category "Design,Best Practices,Performance" --outfile 'apexScanResults.sarif'
+    # - name: Upload SARIF file
+    #   uses: github/codeql-action/upload-sarif@v3
+    #   with:
+    #     sarif_file: apexScanResults.sarif
+    - name: Login to DevHub in docker
+      uses: addnab/docker-run-action@v3
       with:
-        sarif_file: apexScanResults.sarif
+        image: ghcr.io/flxbl-io/sfp
+        options: -v ${{ github.workspace }}:/root/workspace
+        run: |
+          echo  ${{ secrets.SFDX_AUTH_DEVHUB }} > ./authurlfile
+          sf org login sfdx-url --sfdx-url-file authurlfile --set-default-dev-hub --alias=devhub
+          sf org list
+          cp -r .sf ./workspace/c.sf
+          cp -r .sfdx ./workspace/c.sfdx
 
+    # - name: check volume
+    #   run: |
+    #     pwd
+    #     ls -la
+
+    # - name: Check login in docker
+    #   uses: addnab/docker-run-action@v3
+    #   with:
+    #     image: ghcr.io/flxbl-io/sfp
+    #     options: -v ${{ github.workspace }}:/root/workspace
+    #     run: |
+    #       cp -rf ./workspace/c.sf ./.sf
+    #       cp -rf ./workspace/c.sfdx ./.sfdx
+    #       ls -la
+    #       sf org list
+
+    - name: Build package
+      uses: addnab/docker-run-action@v3
+      with:
+        image: ghcr.io/flxbl-io/sfp
+        options: -v ${{ github.workspace }}:/root/workspace
+        run: |
+          cp -rf ./workspace/c.sf ./.sf
+          cp -rf ./workspace/c.sfdx ./.sfdx
+          cd workspace
+          sfp build -v devhub
+
+    - name: Install package
+      uses: addnab/docker-run-action@v3
+      with:
+        image: ghcr.io/flxbl-io/sfp
+        options: -v ${{ github.workspace }}:/root/workspace
+        run: |
+          cp -rf ./workspace/c.sf ./.sf
+          cp -rf ./workspace/c.sfdx ./.sfdx
+          cd workspace
+          sfp install -o devhub
