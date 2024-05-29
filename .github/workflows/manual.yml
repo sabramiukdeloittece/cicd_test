@@ -47,9 +47,8 @@ jobs:
       uses: addnab/docker-run-action@v3
       with:
         image: ghcr.io/flxbl-io/sfp
-        options: -v $GITHUB_WORKSPACE:$GITHUB_WORKSPACE -v $RUNNER_TEMP:$RUNNER_TEMP
+        options: -v ${{ github.workspace }}:/${{ github.workspace }}
         run: |
-          cd work
           echo  ${{ secrets.SFDX_AUTH_DEVHUB }} > ./authurlfile
           sf org login sfdx-url --sfdx-url-file authurlfile --set-default-dev-hub --alias=devhub
           sf org list
@@ -63,7 +62,7 @@ jobs:
       uses: addnab/docker-run-action@v3
       with:
         image: ghcr.io/flxbl-io/sfp
-        options: -v $RUNNER_TEMP:$RUNNER_TEMP 
+        options: -v ${{ github.workspace }}:/${{ github.workspace }}
         run: |
           cd work
           sf org list
