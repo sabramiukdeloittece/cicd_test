@@ -6,7 +6,7 @@ name: Manual workflow
 # or API.
 on:
   pull_request:
-    types: [opened, reopened]
+    types: [opened, reopened, synchronize]
 
   workflow_dispatch:
 
@@ -50,6 +50,8 @@ jobs:
         run: |
           echo  ${{ secrets.SFDX_AUTH_DEVHUB }} > ./authurlfile
           sf org login sfdx-url --sfdx-url-file authurlfile --set-default-dev-hub --alias=devhub
+          sf org list
+          ls -la
 
     - name: Check login in docker
       uses: addnab/docker-run-action@v3
