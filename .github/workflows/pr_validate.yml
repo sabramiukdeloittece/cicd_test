@@ -5,6 +5,8 @@ name: Prepare CI pool
 # Controls when the action will run. Workflow runs when manually triggered using the UI
 # or API.
 on:
+  pull_request:
+    types: [opened, reopened, synchronize]
 
   workflow_dispatch:
 
@@ -45,4 +47,4 @@ jobs:
           cp -rf ./workspace/c.sf ./.sf
           cp -rf ./workspace/c.sfdx ./.sfdx
           cd workspace
-          sfp prepare -f config/project-ci-pool-def.json -v devhub
+          sfp validate -p ci -v devhub
