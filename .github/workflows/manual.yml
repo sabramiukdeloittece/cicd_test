@@ -43,10 +43,17 @@ jobs:
     #   uses: github/codeql-action/upload-sarif@v3
     #   with:
     #     sarif_file: apexScanResults.sarif
+    - name: Login to DevHub in docker
+      uses: addnab/docker-run-action@v3
+      with:
+        image: ghcr.io/flxbl-io/sfp
+        run: |
+          echo  ${{ secrets.SFDX_AUTH_DEVHUB }} > ./authurlfile
+          sf org login sfdx-url --sfdx-url-file authurlfile --set-default-dev-hub --alias=devhub
+
     - name: Check login in docker
       uses: addnab/docker-run-action@v3
       with:
         image: ghcr.io/flxbl-io/sfp
         run: |
           sf org list
-        
