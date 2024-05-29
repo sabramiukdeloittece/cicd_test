@@ -79,6 +79,7 @@ jobs:
         run: |
           cp -rf ./workspace/c.sf ./.sf
           cp -rf ./workspace/c.sfdx ./.sfdx
+          cd workspace
           sfp build -v devhub
 
     - name: Install package
@@ -89,4 +90,5 @@ jobs:
         run: |
           cp -rf ./workspace/c.sf ./.sf
           cp -rf ./workspace/c.sfdx ./.sfdx
+          cd workspace
           sfp install -o devhub
