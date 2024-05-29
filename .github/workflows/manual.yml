@@ -49,6 +49,7 @@ jobs:
         image: ghcr.io/flxbl-io/sfp
         options: -v ${{ github.workspace }}:${{ github.workspace }}
         run: |
+          pwd
           echo  ${{ secrets.SFDX_AUTH_DEVHUB }} > ./authurlfile
           sf org login sfdx-url --sfdx-url-file authurlfile --set-default-dev-hub --alias=devhub
           sf org list
@@ -56,6 +57,7 @@ jobs:
 
     - name: check volume
       run: |
+        pwd
         ls -la
 
     - name: Check login in docker
