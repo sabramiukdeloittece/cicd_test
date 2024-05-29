@@ -53,7 +53,7 @@ jobs:
           sf org login sfdx-url --sfdx-url-file authurlfile --set-default-dev-hub --alias=devhub
           sf org list
           cp -r .sf ./workspace/c.sf
-          cp -r .sfdx ./c.sfdx
+          cp -r .sfdx ./workspace/c.sfdx
 
     - name: check volume
       run: |
@@ -68,4 +68,5 @@ jobs:
         run: |
           cp -rf ./workspace/c.sf ./.sf
           cp -rf ./workspace/c.sfdx ./.sfdx
+          ls -la
           sf org list
