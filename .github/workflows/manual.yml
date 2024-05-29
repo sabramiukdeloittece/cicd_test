@@ -55,6 +55,8 @@ jobs:
           sf org login sfdx-url --sfdx-url-file authurlfile --set-default-dev-hub --alias=devhub
           sf org list
           ls -la
+          cd ..
+          ls -la
 
     - name: check volume
       run: |
