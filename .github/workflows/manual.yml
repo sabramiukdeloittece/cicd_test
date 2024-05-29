@@ -55,12 +55,23 @@ jobs:
           cp -r .sf ./workspace/c.sf
           cp -r .sfdx ./workspace/c.sfdx
 
-    - name: check volume
-      run: |
-        pwd
-        ls -la
+    # - name: check volume
+    #   run: |
+    #     pwd
+    #     ls -la
 
-    - name: Check login in docker
+    # - name: Check login in docker
+    #   uses: addnab/docker-run-action@v3
+    #   with:
+    #     image: ghcr.io/flxbl-io/sfp
+    #     options: -v ${{ github.workspace }}:/root/workspace
+    #     run: |
+    #       cp -rf ./workspace/c.sf ./.sf
+    #       cp -rf ./workspace/c.sfdx ./.sfdx
+    #       ls -la
+    #       sf org list
+
+    - name: Build package
       uses: addnab/docker-run-action@v3
       with:
         image: ghcr.io/flxbl-io/sfp
@@ -68,5 +79,14 @@ jobs:
         run: |
           cp -rf ./workspace/c.sf ./.sf
           cp -rf ./workspace/c.sfdx ./.sfdx
-          ls -la
-          sf org list
+          sfp build -v devhub
+
+    - name: Install package
+      uses: addnab/docker-run-action@v3
+      with:
+        image: ghcr.io/flxbl-io/sfp
+        options: -v ${{ github.workspace }}:/root/workspace
+        run: |
+          cp -rf ./workspace/c.sf ./.sf
+          cp -rf ./workspace/c.sfdx ./.sfdx
+          sfp install -o devhub
