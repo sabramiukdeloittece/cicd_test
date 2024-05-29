@@ -36,11 +36,17 @@ jobs:
     - name: Check login
       run: |
         sf org list
-    - name: Scanner
-      run: |
-        sf scanner run --format sarif --target './**/*.cls' --category "Design,Best Practices,Performance" --outfile 'apexScanResults.sarif'
-    - name: Upload SARIF file
-      uses: github/codeql-action/upload-sarif@v3
+    # - name: Scanner
+    #   run: |
+    #     sf scanner run --format sarif --target './**/*.cls' --category "Design,Best Practices,Performance" --outfile 'apexScanResults.sarif'
+    # - name: Upload SARIF file
+    #   uses: github/codeql-action/upload-sarif@v3
+    #   with:
+    #     sarif_file: apexScanResults.sarif
+    - name: Check login in docker
+      uses: addnab/docker-run-action@v3
       with:
-        sarif_file: apexScanResults.sarif
-
+        image: ghcr.io/flxbl-io/sfp
+        run: |
+          sf org list
+        
