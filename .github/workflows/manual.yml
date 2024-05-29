@@ -68,4 +68,7 @@ jobs:
         options: -v ${{ github.workspace }}:/root/workspace
         run: |
           cd workspace
+          ls -la
+          cd .sfdx
+          ls -la
           sf org list
