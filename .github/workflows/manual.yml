@@ -49,14 +49,12 @@ jobs:
         image: ghcr.io/flxbl-io/sfp
         options: -v ${{ github.workspace }}:/root/workspace
         run: |
+          cp -r .sf ./workspace/c.sf
+          cp -r .sfdx ./c.sfdx
           cd workspace
-          pwd
           echo  ${{ secrets.SFDX_AUTH_DEVHUB }} > ./authurlfile
           sf org login sfdx-url --sfdx-url-file authurlfile --set-default-dev-hub --alias=devhub
           sf org list
-          ls -la
-          cd ..
-          ls -la
 
     - name: check volume
       run: |
@@ -69,8 +67,6 @@ jobs:
         image: ghcr.io/flxbl-io/sfp
         options: -v ${{ github.workspace }}:/root/workspace
         run: |
-          cd workspace
-          ls -la
-          cd .sfdx
-          ls -la
+          cp -rf ./workspace/c.sf ./.sf
+          cp -rf ./workspace/c.sfdx ./.sfdx
           sf org list
