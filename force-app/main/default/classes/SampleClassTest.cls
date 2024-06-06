@@ -26,5 +26,6 @@ private class SampleClassTest {
     static void myUnitTest() {
         SampleClass c = new SampleClass();
         //my unit test
+        //my other unit test
     }
 }

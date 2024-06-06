@@ -4,11 +4,155 @@
       "package": "force-app",
       "versionNumber": "1.0.0.NEXT",
       "path": "force-app",
-      "default": true
+      "default": true,
+      "dependencies": [
+        {
+          "package": "Financial Services Cloud"
+        },
+        {
+          "package": "Universal Lookup Field Component"
+        },
+        {
+          "package": "MobileLandingNonEssentials"
+        },
+        {
+          "package": "DreamForceTrials"
+        },
+        {
+          "package": "navigationButtonFSC"
+        },
+        {
+          "package": "Flow Components"
+        },
+        {
+          "package": "Streaming Monitor"
+        },
+        {
+          "package": "Salesforce Connected Apps"
+        },
+        {
+          "package": "Salesforce Mobile Apps"
+        },
+        {
+          "package": "SalesforceIQ Cloud"
+        },
+        {
+          "package": "Lightning Flow for Financial Services Cloud"
+        },
+        {
+          "package": "FlowActionsBasePack"
+        },
+        {
+          "package": "Dynamic Flow Progress"
+        },
+        {
+          "package": "Salesforce Adoption Dashboards"
+        },
+        {
+          "package": "Salesforce.com CRM Dashboards"
+        },
+        {
+          "package": "FlowScreenComponentsBasePack"
+        },
+        {
+          "package": "Sales Insights"
+        },
+        {
+          "package": "datatable"
+        },
+        {
+          "package": "Flow - SOQL IN Condition"
+        },
+        {
+          "package": "Tableau Viz Lightning Web Component"
+        },
+        {
+          "package": "MarketingCloudConnectedApp"
+        },
+        {
+          "package": "CMTD Enhanced Related List"
+        },
+        {
+          "package": "Salesforce Adapter"
+        },
+        {
+          "package": "Financial Services Referral Ext"
+        },
+        {
+          "package": "Financial Services Ext"
+        },
+        {
+          "package": "FlowActionsBasePack"
+        },
+        {
+          "package": "flowButton"
+        },
+        {
+          "package": "LinkThat Cube"
+        },
+        {
+          "package": "CollectionActionsL"
+        },
+        {
+          "package": "GetFeedback: Automatic Response Flow"
+        },
+        {
+          "package": "richTextAreaFSC"
+        },
+        {
+          "package": "NavigateEverywhereAction"
+        },
+        {
+          "package": "ConvertStrings"
+        },
+        {
+          "package": "Marketing Cloud"
+        },
+        {
+          "package": "SocialCustomerService"
+        }
+      ]
     }
   ],
   "name": "cicd_test",
   "namespace": "",
   "sfdcLoginUrl": "https://login.salesforce.com",
-  "sourceApiVersion": "59.0"
+  "sourceApiVersion": "59.0",
+  "packageAliases": {
+    "Universal Lookup Field Component":"04t1n0000021kQuAAI",
+    "MobileLandingNonEssentials":"04t0b000001NxJWAA0",
+    "DreamForceTrials":"04t0b000001DkOeAAK",
+    "navigationButtonFSC":"04t1K0000033MNbQAM",
+    "Flow Components":"04t1U000007skEbQAI",
+    "Streaming Monitor":"04t1t000003nQtdAAE",
+    "Salesforce Connected Apps":"04t30000001DUvrAAG",
+    "Salesforce Mobile Apps":"04t4V000001VUpTQAW",
+    "SalesforceIQ Cloud":"04t36000000adDUAAY",
+    "Lightning Flow for Financial Services Cloud":"04t3i000000jP1gAAE",
+    "FlowActionsBasePack":"04t4W00000309DkQAI",
+    "Dynamic Flow Progress":"04t4p0000027q4bAAA",
+    "Salesforce Adoption Dashboards":"04t4x000000pALsAAM",
+    "Salesforce.com CRM Dashboards":"04t50000000EcdrAAC",
+    "Sales Insights":"04t58000000SGw3AAG",
+    "datatable":"04t5G000004J7MxQAK",
+    "Flow - SOQL IN Condition":"04t5g000000gWPkAAM",
+    "Tableau Viz Lightning Web Component":"04t5w000005diA4AAI",
+    "MarketingCloudConnectedApp":"04t61000000gWo1AAE",
+    "CMTD Enhanced Related List":"04t6F000000cgcYQAQ",
+    "Salesforce Adapter":"04t7Q000000MPxiQAG",
+    "Financial Services Referral Ext":"04t80000000lTp4AAE",
+    "Financial Services Ext":"04t1E000001Iql5QAC",
+    "Financial Services Cloud":"04tHn000001Vv4aIAC",
+    "FlowActionsBasePack":"04t8b000001BTgsAAG",
+    "flowButton":"04tB0000000P3LNIA0",
+    "LinkThat Cube":"04t5p000001IHLqAAO",
+    "CollectionActionsL":"04t5G000003rUqVQAU",
+    "GetFeedback: Automatic Response Flow":"04tf4000003zVaTAAU",
+    "richTextAreaFSC":"04t5G0000047xM8QAI",
+    "NavigateEverywhereAction":"04t5G000003rUhrQAE",
+    "ConvertStrings":"04t5G000004J7K8QAK",
+    "FlowScreenComponentsBasePack":"04t5G000004J7J0QAK",
+    "Marketing Cloud":"04t6S000000pFg5QAE",
+    "SocialCustomerService":"04ti0000000QzQyAAK"
+  }
 }

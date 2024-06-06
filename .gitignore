@@ -46,3 +46,6 @@ $RECYCLE.BIN/
 
 #logs
 *.sarif
+
+#SFP
+.sfpowerscripts/
